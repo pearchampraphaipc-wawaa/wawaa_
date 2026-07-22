@@ -20,6 +20,14 @@
     {
       "src": "data/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "video/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "docs/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
