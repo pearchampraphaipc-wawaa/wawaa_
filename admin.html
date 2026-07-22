@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIPE Admin Feed</title>
+  <link rel="icon" href="images/logo_aipe.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="premium.css">
+  <style>
+    /* Feed Layout */
+    body { background: var(--clr-bg-dark); color: var(--clr-text); font-family: 'Sarabun', sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* Login Section */
+    .admin-login-container { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+    .admin-login-box { background: rgba(18, 22, 33, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); text-align: center; }
+    .admin-login-box img { height: 60px; margin-bottom: 20px; }
+    
+    /* Top Nav */
+    .admin-nav { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background: rgba(5, 5, 10, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid var(--clr-border-glow, rgba(129, 140, 248, 0.3)); box-shadow: 0 4px 20px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 100; display: none; }
+    .admin-nav-left { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.2rem; color: var(--clr-text-bright); }
+    .admin-nav-left img { height: 35px; }
+    .admin-nav-right .btn { padding: 6px 12px; font-size: 0.9rem; }
+    
+    /* Feed Container */
+    .feed-container { display: none; width: 100%; max-width: 680px; margin: 0 auto; padding: 80px 10px 40px 10px; position: relative; z-index: 10; }
+    
+    /* Cards Base */
+    .feed-card { background: rgba(15, 20, 40, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; margin-bottom: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); backdrop-filter: blur(12px); overflow: hidden; }
+    
+    /* Create Post Card */
+    .create-post-card { padding: 15px; }
+    .create-top { display: flex; gap: 10px; align-items: center; margin-bottom: 15px; }
+    .create-avatar { width: 40px; height: 40px; border-radius: 50%; background: #333; object-fit: cover; }
+    .create-input-fake { flex: 1; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 10px 15px; color: #aaa; cursor: pointer; transition: 0.2s; }
+    .create-input-fake:hover { background: rgba(255,255,255,0.1); }
+    
+    /* Create Post Form (Hidden by default) */
+    .create-post-form { display: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-top: 15px; animation: fadeIn 0.3s ease; }
+    .create-post-form .form-group { margin-bottom: 15px; }
+    .create-post-form input[type="text"], .create-post-form select, .create-post-form input[type="file"] { width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; }
+    .create-post-form .btn-post { width: 100%; border-radius: 8px; font-size: 1.1rem; padding: 10px; font-weight: 600; margin-top: 10px; }
+    
+    /* Post Card */
+    .post-header { padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; }
+    .post-author { display: flex; align-items: center; gap: 10px; }
+    .post-author-info h4 { margin: 0; font-size: 1rem; color: var(--clr-text-bright); }
+    .post-author-info span { font-size: 0.8rem; color: #888; }
+    
+    /* Options Dropdown */
+    .post-options { position: relative; }
+    .options-btn { background: transparent; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer; padding: 5px; border-radius: 50%; transition: 0.2s; }
+    .options-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+    .options-menu { display: none; position: absolute; right: 0; top: 100%; background: rgba(30, 35, 45, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); width: 150px; z-index: 100; overflow: hidden; backdrop-filter: blur(10px); }
+    .options-menu.active { display: block; animation: fadeIn 0.2s; }
+    .options-menu button { width: 100%; text-align: left; padding: 12px 15px; background: transparent; border: none; color: white; cursor: pointer; font-family: 'Sarabun'; font-size: 0.95rem; transition: 0.2s; }
+    .options-menu button:hover { background: rgba(255,255,255,0.1); }
+    .options-menu button i { margin-right: 8px; width: 16px; text-align: center; }
+    
+    .post-content { padding: 5px 15px 15px 15px; font-size: 1.1rem; font-weight: 500; }
+    .post-media { width: 100%; max-height: 500px; object-fit: cover; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    
+    .post-footer { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); }
+    .post-size-badge { background: rgba(var(--clr-primary-rgb), 0.15); color: var(--clr-primary); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(var(--clr-primary-rgb), 0.3); }
+    
+    /* Edit Modal (Dialog style) */
+    .admin-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(8px); padding: 20px; }
+    .admin-modal-content { background: rgba(20, 24, 35, 1); padding: 0; border-radius: 12px; width: 100%; max-width: 500px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; }
+    .modal-header { padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); }
+    .modal-header h3 { margin: 0; font-size: 1.25rem; color: var(--clr-text-bright); }
+    .close-modal { font-size: 1.5rem; color: #aaa; cursor: pointer; background: rgba(255,255,255,0.05); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.2s; }
+    .close-modal:hover { background: rgba(255,255,255,0.1); color: white; }
+    .modal-body { padding: 20px; }
+    .modal-body input[type="text"], .modal-body select, .modal-body input[type="file"] { width: 100%; padding: 12px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; margin-top: 8px; font-family: 'Sarabun'; }
+    .modal-footer { padding: 15px 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: right; background: rgba(0,0,0,0.2); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <!-- Background Particles -->
+  <div class="bg-particles">
+    <div class="orb"></div><div class="orb"></div><div class="orb"></div>
+  </div>
+
+  <!-- Login Section -->
+  <div class="admin-login-container" id="loginSection">
+    <div class="admin-login-box">
+      <img src="images/logo_aipe.png" alt="AIPE Logo">
+      <h2 style="margin-bottom: 30px;">AIPE Admin Portal</h2>
+      <form id="loginForm">
+        <div class="form-group"><input type="text" id="username" placeholder="Username" required style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white;"></div>
+        <div class="form-group"><input type="password" id="password" placeholder="Password" required style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white;"></div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; border-radius: 8px; font-size: 1.1rem; font-weight: bold;">เข้าสู่ระบบ (Sign In)</button>
+      </form>
+      <a href="news.html" style="display: block; margin-top: 25px; color: var(--clr-text-dim); text-decoration: none; font-size: 0.9rem; transition: 0.3s;"><i class="fas fa-arrow-left"></i> กลับสู่หน้าข่าวสาร</a>
+    </div>
+  </div>
+
+  <!-- Top Nav -->
+  <nav class="admin-nav" id="adminNav">
+    <div class="admin-nav-left">
+      <img src="images/logo_aipe.png" alt="AIPE Logo">
+      <span>AIPE Admin</span>
+    </div>
+    <div class="admin-nav-right">
+      <button class="btn" style="background: rgba(255,255,255,0.1); border: none;" onclick="logout()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+    </div>
+  </nav>
+
+  <!-- Feed Container -->
+  <div class="feed-container" id="dashboardSection">
+    
+    <!-- Create Post Card -->
+    <div class="feed-card create-post-card">
+      <div class="create-top">
+        <img src="images/logo_aipe.png" alt="Admin" class="create-avatar">
+        <div class="create-input-fake" onclick="toggleCreateForm()">
+          มีข่าวสารหรือกิจกรรมอะไรใหม่ แจ้งให้นักศึกษาทราบ...
+        </div>
+      </div>
+      
+      <form id="createPostForm" class="create-post-form">
+        <div class="form-group">
+          <label style="font-size: 0.9rem; color: #ccc;">หัวข้อข่าว (Title)</label>
+          <input type="text" id="createTitle" placeholder="เช่น: โครงการศึกษาดูงานบริษัท AI..." required>
+        </div>
+        <div class="form-group">
+          <label style="font-size: 0.9rem; color: #ccc;">แนบรูปภาพ (Image)</label>
+          <input type="file" id="createImage" accept="image/*" required>
+        </div>
+        <div class="form-group">
+          <label style="font-size: 0.9rem; color: #ccc;">ขนาดการแสดงผล (Size)</label>
+          <select id="createSize">
+            <option value="small">เล็ก (Small) - แสดงผลแบบ Grid</option>
+            <option value="large">ใหญ่ (Large) - แสดงผลเด่นเต็มหน้าจอ</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-post"><i class="fas fa-paper-plane"></i> โพสต์ข่าว</button>
+      </form>
+    </div>
+    
+    <!-- Feed List -->
+    <div id="newsFeedList">
+      <!-- Posts dynamically injected here -->
+    </div>
+
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="admin-modal" id="editModal">
+    <div class="admin-modal-content">
+      <div class="modal-header">
+        <h3>แก้ไขโพสต์ข่าว</h3>
+        <span class="close-modal" onclick="closeEditModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="editForm">
+          <input type="hidden" id="editNewsId">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label style="font-size: 0.9rem; color: #ccc;">หัวข้อข่าว</label>
+            <input type="text" id="editTitle" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label style="font-size: 0.9rem; color: #ccc;">เปลี่ยนรูปภาพ (เว้นว่างหากใช้รูปเดิม)</label>
+            <input type="file" id="editImage" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label style="font-size: 0.9rem; color: #ccc;">ขนาดการแสดงผล</label>
+            <select id="editSize">
+              <option value="small">เล็ก (Small)</option>
+              <option value="large">ใหญ่ (Large)</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" style="background: rgba(255,255,255,0.1); border: none; margin-right: 10px;" onclick="closeEditModal()">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" onclick="submitEditForm()">บันทึกการแก้ไข</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Clear old persistent token if it exists
+    localStorage.removeItem('aipe_admin_token'); 
+    
+    let token = sessionStorage.getItem('aipe_admin_token') || null;
+    
+    // Init View
+    if (token) {
+      showDashboard();
+    }
+    
+    function showDashboard() {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('adminNav').style.display = 'flex';
+      document.getElementById('dashboardSection').style.display = 'block';
+      fetchNewsFeed();
+    }
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const res = await fetch('/api/login', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: user, password: pass })
+      });
+      const data = await res.json();
+      if(data.success) {
+        token = 'Bearer ' + data.token;
+        sessionStorage.setItem('aipe_admin_token', token);
+        showDashboard();
+      } else {
+        alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+      }
+    });
+    
+    // Logout
+    function logout() {
+      sessionStorage.removeItem('aipe_admin_token');
+      token = null;
+      document.getElementById('loginSection').style.display = 'flex';
+      document.getElementById('adminNav').style.display = 'none';
+      document.getElementById('dashboardSection').style.display = 'none';
+    }
+    
+    // Create Post Toggle
+    function toggleCreateForm() {
+      const form = document.getElementById('createPostForm');
+      form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Options Menu Toggle
+    function toggleOptionsMenu(id) {
+      // Close any open menus first
+      document.querySelectorAll('.options-menu').forEach(menu => {
+        if (menu.id !== 'menu-' + id) menu.classList.remove('active');
+      });
+      const menu = document.getElementById('menu-' + id);
+      if(menu) menu.classList.toggle('active');
+    }
+
+    // Close options menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.post-options')) {
+        document.querySelectorAll('.options-menu').forEach(menu => menu.classList.remove('active'));
+      }
+    });
+
+    // Fetch and Render Feed
+    let currentNews = [];
+    async function fetchNewsFeed() {
+      try {
+        const res = await fetch('/api/news');
+        currentNews = await res.json();
+        
+        // Sort news to show newest first (reverse array)
+        currentNews.reverse();
+        
+        renderFeed();
+      } catch(e) { console.error('Failed to load news'); }
+    }
+    
+    function renderFeed() {
+      const list = document.getElementById('newsFeedList');
+      list.innerHTML = '';
+      
+      if(currentNews.length === 0) {
+        list.innerHTML = '<div style="text-align: center; color: #aaa; padding: 40px;">ยังไม่มีข่าวสารใดๆ</div>';
+        return;
+      }
+      
+      currentNews.forEach(item => {
+        const sizeLabel = item.size === 'large' ? 'สเกลใหญ่ (Large)' : 'สเกลเล็ก (Small)';
+        
+        const card = document.createElement('div');
+        card.className = 'feed-card';
+        card.innerHTML = `
+          <div class="post-header">
+            <div class="post-author">
+              <img src="images/logo_aipe.png" alt="Admin" style="width: 40px; height: 40px; border-radius: 50%; background: #fff; padding: 2px; object-fit: contain;">
+              <div class="post-author-info">
+                <h4>AIPE Admin</h4>
+                <span>อัปเดตเมื่อเร็วๆ นี้</span>
+              </div>
+            </div>
+            <div class="post-options">
+              <button class="options-btn" onclick="toggleOptionsMenu(${item.id})"><i class="fas fa-ellipsis-h"></i></button>
+              <div class="options-menu" id="menu-${item.id}">
+                <button onclick="openEditModal(${item.id})"><i class="fas fa-pen"></i> แก้ไขโพสต์</button>
+                <button onclick="deletePost(${item.id})" style="color: #ef233c;"><i class="fas fa-trash"></i> ลบโพสต์</button>
+              </div>
+            </div>
+          </div>
+          <div class="post-content">
+            ${item.title}
+          </div>
+          <img src="${item.image}" alt="Post image" class="post-media">
+          <div class="post-footer">
+            <span style="font-size: 0.9rem; color: #aaa;"><i class="fas fa-th-large"></i> การแสดงผล:</span>
+            <span class="post-size-badge">${sizeLabel}</span>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // Create Post Form Submit
+    document.getElementById('createPostForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('title', document.getElementById('createTitle').value);
+      formData.append('size', document.getElementById('createSize').value);
+      formData.append('image', document.getElementById('createImage').files[0]);
+      
+      const res = await fetch('/api/news', {
+        method: 'POST',
+        headers: { 'Authorization': token },
+        body: formData
+      });
+      
+      if(res.ok) {
+        document.getElementById('createPostForm').reset();
+        document.getElementById('createPostForm').style.display = 'none';
+        fetchNewsFeed();
+      } else {
+        alert('เกิดข้อผิดพลาดในการโพสต์ข่าว');
+      }
+    });
+
+    // Edit Modal Logic
+    function openEditModal(id) {
+      document.getElementById('editModal').style.display = 'flex';
+      const item = currentNews.find(n => n.id === id);
+      document.getElementById('editNewsId').value = id;
+      document.getElementById('editTitle').value = item.title;
+      document.getElementById('editSize').value = item.size;
+      document.getElementById('editImage').value = ''; // clear file input
+    }
+    
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+    
+    async function submitEditForm() {
+      const id = document.getElementById('editNewsId').value;
+      const formData = new FormData();
+      formData.append('title', document.getElementById('editTitle').value);
+      formData.append('size', document.getElementById('editSize').value);
+      if(document.getElementById('editImage').files[0]) {
+        formData.append('image', document.getElementById('editImage').files[0]);
+      }
+      
+      const res = await fetch('/api/news/' + id, {
+        method: 'PUT',
+        headers: { 'Authorization': token },
+        body: formData
+      });
+      
+      if(res.ok) {
+        closeEditModal();
+        fetchNewsFeed();
+      } else {
+        alert('เกิดข้อผิดพลาดในการแก้ไขข่าว');
+      }
+    }
+    
+    // Delete Post
+    async function deletePost(id) {
+      if(!confirm('คุณแน่ใจหรือไม่ว่าต้องการลบโพสต์นี้อย่างถาวร?')) return;
+      await fetch('/api/news/' + id, {
+        method: 'DELETE',
+        headers: { 'Authorization': token }
+      });
+      fetchNewsFeed();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมปัญญาประดิษฐ์ (AI Engineering) — เรียนรู้เทคโนโลยี AI ล้ำสมัย พร้อมก้าวสู่อนาคตแห่งนวัตกรรม">
+  <title>วิศวกรรมปัญญาประดิษฐ์ | AI Engineering</title>
+  <link rel="icon" href="images/logo_aipe.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="premium.css">
+</head>
+<body>
+
+  <!-- Background Particles -->
+  <div class="bg-particles">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       NAVBAR
+       ════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+            <a href="index.html" class="nav-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="images/logo_aipe.png" alt="AIPE Logo" class="nav-logo-img" style="height: 50px; width: auto; object-fit: contain;">
+        <div class="nav-logo-text" style="display: flex; flex-direction: column; justify-content: center;">
+          <span style="font-size: 1.05rem; font-weight: 700; color: var(--clr-text-bright); line-height: 1.2;">วิศวกรรมปัญญาประดิษฐ์และการสั่งการ</span>
+          <span style="font-size: 0.75rem; font-weight: 500; color: var(--clr-primary); line-height: 1.2;">Artificial Intelligence and Prompt Engineering</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="curriculum.html"><i class="fas fa-file-pdf"></i> หลักสูตรการศึกษา</a></li>
+        <li><a href="news.html" class="active">ข่าว / กิจกรรม</a></li>
+        <li><a href="faculty.html">บุคลากร</a></li>
+        <li><a href="admission.html">สมัครเรียน</a></li>
+      </ul>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Spacer for fixed navbar -->
+  <div style='margin-top: 100px;'></div>
+
+<!-- ════════════════════════════════════════
+       NEWS & ACTIVITIES SECTION
+       ════════════════════════════════════════ -->
+  <section class="news" id="news">
+    <div class="container">
+      <div class="news-header reveal">
+        <span class="section-label">News & Activities</span>
+        <h2 class="section-title" id="secretAdminTrigger" style="cursor: default;">ข่าวสาร / กิจกรรม</h2>
+        <p class="section-subtitle">ติดตามข่าวสารล่าสุดและกิจกรรมเด่นของหลักสูตรวิศวกรรมปัญญาประดิษฐ์และการสั่งการ</p>
+      </div>
+
+      <div class="news-layout reveal">
+        <!-- Gallery Section -->
+        <div class="news-gallery" id="dynamicNewsContainer">
+          <!-- Dynamic Content Loads Here -->
+        </div>
+
+        <!-- Latest Post Section -->
+        <div class="latest-post-wrapper">
+          <div id="fb-root"></div>
+          <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61566550299764&tabs=timeline&width=500&height=520&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="500" height="520" style="border:none;overflow:hidden; max-width: 100%;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Left Column -->
+        <div class="footer-column">
+          <div class="footer-brand">
+                  <a href="index.html" class="nav-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="images/logo_aipe.png" alt="AIPE Logo" class="nav-logo-img" style="height: 50px; width: auto; object-fit: contain;">
+        <div class="nav-logo-text" style="display: flex; flex-direction: column; justify-content: center;">
+          <span style="font-size: 1.05rem; font-weight: 700; color: var(--clr-text-bright); line-height: 1.2;">วิศวกรรมปัญญาประดิษฐ์และการสั่งการ</span>
+          <span style="font-size: 0.75rem; font-weight: 500; color: var(--clr-primary); line-height: 1.2;">Artificial Intelligence and Prompt Engineering</span>
+        </div>
+      </a>
+          </div>
+          
+          <ul class="footer-contact-list">
+            <li>
+              <div class="icon-wrapper"><i class="fas fa-phone-alt"></i></div>
+              <span>+66 45 353 048</span>
+            </li>
+            <li>
+              <div class="icon-wrapper"><i class="fas fa-map-marker-alt"></i></div>
+              <span>85 ถนนสถลมาร์ค ตำบลเมืองศรีไค อำเภอวารินชำราบ จังหวัดอุบลราชธานี 34190</span>
+            </li>
+            <li>
+              <div class="icon-wrapper"><i class="fas fa-envelope"></i></div>
+              <span>aio@ubu.ac.th</span>
+            </li>
+            <li>
+              <div class="icon-wrapper"><i class="fab fa-facebook-messenger"></i></div>
+              <span>หลักสูตรวิศวกรรมปัญญาประดิษฐ์และการสั่งการ</span>
+            </li>
+            <li><div class="icon-wrapper"><i class="fas fa-user-graduate"></i></div><span><a href="admission.html" style="color: inherit; text-decoration: none; font-weight: bold;">สมัครเรียน</a></span></li>
+      </ul>
+
+          <div class="footer-socials-horizontal">
+            <a href="https://www.facebook.com/profile.php?id=61566550299764&locale=th_TH" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+
+        <!-- Right Column (Registration Contact) -->
+        <div class="footer-column">
+          <h3>ติดต่องานทะเบียน</h3>
+          <ul class="footer-contact-list">
+            <li>
+              <div class="icon-wrapper"><i class="fas fa-phone-alt"></i></div>
+              <span>045-353117 หรือ 045-353118</span>
+            </li>
+            <li>
+              <div class="icon-wrapper"><i class="fas fa-map-marker-alt"></i></div>
+              <span>กองบริการการศึกษา อาคารสำนักงานอธิการบดี (หลังเก่า) มหาวิทยาลัยอุบลราชธานี เลขที่ 85 ถ.สถลมาร์ค ต.เมืองศรีไค อ.วารินชำราบ จ.อุบลราชธานี</span>
+            </li>
+            <li>
+              <div class="icon-wrapper"><i class="fas fa-clock"></i></div>
+              <span>เวลาราชการ (จันทร์ - ศุกร์ เวลา 08.30 - 16.30 น.)</span>
+            </li>
+            <li><div class="icon-wrapper"><i class="fas fa-user-graduate"></i></div><span><a href="admission.html" style="color: inherit; text-decoration: none; font-weight: bold;">สมัครเรียน</a></span></li>
+      </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════
+       JAVASCRIPT
+       ════════════════════════════════════════ -->
+  <script>
+    // ── Navbar scroll effect ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ── Mobile nav toggle ──
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    const navCta = document.getElementById('navCta');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navCta.classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navCta.classList.remove('open');
+      });
+    });
+
+    // ── Active nav link on scroll ──
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 200;
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+        if (navLink) {
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            navLink.classList.add('active');
+          } else {
+            navLink.classList.remove('active');
+          }
+        }
+      });
+    });
+
+    // ── Year Tabs ──
+    const yearTabs = document.querySelectorAll('.year-tab');
+    yearTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active from all tabs
+        yearTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        // Hide all curriculum tables
+        document.querySelectorAll('.curriculum-tables').forEach(grid => {
+          grid.style.display = 'none';
+        });
+
+        // Show selected year
+        const year = tab.getAttribute('data-year');
+        const target = document.getElementById(`year-${year}`);
+        if (target) {
+          target.style.display = 'flex';
+          // Trigger reveal animation
+          target.classList.add('visible');
+        }
+      });
+    });
+
+    // ── Scroll Reveal Animation ──
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ── Form Submit ──
+    const applyForm = document.getElementById('applyForm');
+    if (applyForm) {
+      applyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Show success message
+        const btn = applyForm.querySelector('.btn-submit');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check-circle"></i> ส่งใบสมัครเรียบร้อยแล้ว!';
+        btn.style.background = 'linear-gradient(135deg, #06D6A0, #05B384)';
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = '';
+          applyForm.reset();
+        }, 3000);
+      });
+    }
+
+    // ── Smooth counter animation for hero stats ──
+    function animateCounter(element, target, suffix = '') {
+      let current = 0;
+      const increment = target / 60;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(current) + suffix;
+      }, 16);
+    }
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const stats = entry.target.querySelectorAll('.hero-stat .number');
+          if (stats[0]) animateCounter(stats[0], 4, '');
+          if (stats[1]) animateCounter(stats[1], 125, '');
+          heroObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) heroObserver.observe(heroStats);
+  </script>
+
+  <script>
+    // --- Dynamic News Logic ---
+    const trigger = document.getElementById('secretAdminTrigger');
+    
+    // Hidden login trigger (Double click)
+    if(trigger) {
+      trigger.addEventListener('dblclick', () => {
+        window.location.href = '/admin.html';
+      });
+    }
+
+    // Fetch News
+    async function fetchNews() {
+      try {
+        const res = await fetch('/api/news');
+        const news = await res.json();
+        renderNews(news);
+      } catch(e) { console.error('Failed to load news'); }
+    }
+
+    function renderNews(news) {
+      const container = document.getElementById('dynamicNewsContainer');
+      if(!container) return;
+      container.innerHTML = '';
+      
+      let largeHtml = '';
+      let smallsHtml = '<div class="gallery-grid-small">';
+      
+      news.forEach((item) => {
+        let card = `
+          <div class="gallery-item ${item.size}" style="position:relative;">
+            <img src="${item.image}" alt="${item.title}">
+            <div class="gallery-overlay"><h4>${item.title}</h4></div>
+          </div>
+        `;
+        if (item.size === 'large' && !largeHtml) {
+          largeHtml = card;
+        } else {
+          smallsHtml += card;
+        }
+      });
+      smallsHtml += '</div>';
+      container.innerHTML = largeHtml + smallsHtml;
+    }
+
+    // Initial load
+    fetchNews();
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

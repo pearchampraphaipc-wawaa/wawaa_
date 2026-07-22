@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="สมัครเรียน หลักสูตรวิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมปัญญาประดิษฐ์ (AI Engineering)">
+  <title>สมัครเรียน | วิศวกรรมปัญญาประดิษฐ์</title>
+  <link rel="icon" href="images/logo_aipe.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .apply-page {
+      padding: 160px 0 100px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .apply-card {
+      background: var(--clr-bg-card);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      padding: 60px 40px;
+      box-shadow: var(--shadow-elevated);
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .apply-card-header {
+      margin-bottom: 40px;
+    }
+
+    .apply-card-header i {
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .apply-card-header h1 {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--clr-text-bright);
+      margin-bottom: 15px;
+    }
+
+    .apply-card-header p {
+      color: var(--clr-text-muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .coming-soon-badge {
+      display: inline-block;
+      background: rgba(108, 58, 237, 0.15);
+      color: var(--clr-primary-light);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(108, 58, 237, 0.3);
+    }
+
+    .external-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 20px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-accent) 100%);
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(108, 58, 237, 0.3);
+    }
+
+    .external-link-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(108, 58, 237, 0.5);
+    }
+
+    .back-home {
+      display: inline-block;
+      margin-top: 30px;
+      color: var(--clr-text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    
+    .back-home:hover {
+      color: var(--clr-text-bright);
+    }
+  </style>
+<link rel="stylesheet" href="premium.css">
+</head>
+<body>
+
+  <!-- Background Particles -->
+  <div class="bg-particles">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar" style="background: rgba(13, 14, 21, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon"><i class="fas fa-robot"></i></div>
+        <span>AI Engineering</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">กลับหน้าหลัก</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- APPLY SECTION -->
+  <section class="apply-page">
+    <div class="container">
+      <div class="apply-card reveal active">
+        <div class="apply-card-header">
+          <i class="fas fa-user-graduate"></i>
+          <h1>ระบบรับสมัครนักศึกษาใหม่</h1>
+          <span class="coming-soon-badge"><i class="fas fa-clock"></i> รอกำหนดลิงก์รับสมัคร</span>
+          <p>มาร่วมเป็นส่วนหนึ่งของวิศวกร AI แห่งอนาคต<br>ระบบจะนำท่านไปยังเว็บไซต์รับสมัครของมหาวิทยาลัย</p>
+        </div>
+        
+        <!-- Placeholder for the actual application link -->
+        <a href="#" class="external-link-btn" id="applyLinkBtn" onclick="alert('เดี๋ยวจะเอาลิงก์มาใส่ตรงนี้นะครับ'); return false;">
+          <span>เข้าสู่ระบบรับสมัคร</span>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> กลับสู่หน้าหลัก</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
+
+

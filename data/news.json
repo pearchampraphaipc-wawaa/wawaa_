@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "นักศึกษาทำงานในห้องปฏิบัติการ AI",
+    "image": "images/news_activity.jpg",
+    "size": "large"
+  },
+  {
+    "id": 2,
+    "title": "การแข่งขันหุ่นยนต์",
+    "image": "images/activity_1.jpg",
+    "size": "small"
+  },
+  {
+    "id": 3,
+    "title": "สัมมนาวิชาการ",
+    "image": "images/activity_2.jpg",
+    "size": "small"
+  }
+]
