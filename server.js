@@ -131,7 +131,13 @@ app.use(express.static(__dirname, {
   extensions: ['html']
 }));
 
-const PORT = 3333;
-app.listen(PORT, () => {
-  console.log(`Backend Server running on http://localhost:${PORT}`);
-});
+// Export the Express app for Vercel
+module.exports = app;
+
+// Only listen if not running on Vercel
+if (require.main === module) {
+  const PORT = process.env.PORT || 3333;
+  app.listen(PORT, () => {
+    console.log(`Backend Server running on http://localhost:${PORT}`);
+  });
+}
