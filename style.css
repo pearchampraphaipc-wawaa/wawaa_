@@ -1637,9 +1637,9 @@ img {
 .doc-section { margin-bottom: 3.5rem; }
 .doc-section .section-title { font-size: 1.4rem; font-weight: 700; color: var(--clr-primary); border-bottom: 2px solid var(--clr-primary); padding-bottom: 0.6rem; margin-bottom: 1.75rem; display: inline-block; }
 .doc-section .subsection-title { font-size: 1.2rem; font-weight: 700; color: var(--clr-text-bright); margin-top: 1.75rem; margin-bottom: 0.75rem; }
-.doc-p { text-indent: 2.5rem; margin-bottom: 1rem; text-align: justify; font-size: 1.08rem; color: var(--clr-text-muted); }
-.doc-ul, .doc-ol { padding-left: 2.5rem; margin-bottom: 1.5rem; font-size: 1.08rem; color: var(--clr-text-muted); }
-.doc-ul li, .doc-ol li { margin-bottom: 0.6rem; text-align: justify; }
+.doc-p { text-indent: 2.5rem; margin-bottom: 1rem; text-align: left; font-size: 1.08rem; color: var(--clr-text-muted); }
+.doc-ul, .doc-ol { margin-left: 2rem; margin-bottom: 1.5rem; color: var(--clr-text-muted); line-height: 1.8; }
+.doc-ul li, .doc-ol li { margin-bottom: 0.6rem; text-align: left; }
 .official-table, .credit-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0 2rem; }
 .official-table th, .official-table td, .credit-table th, .credit-table td { border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem 1.25rem; font-size: 1.05rem; vertical-align: top; }
 .official-table th { background: rgba(255, 255, 255, 0.05); font-weight: 700; color: var(--clr-primary); width: 28%; text-align: left; }
